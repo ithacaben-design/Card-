@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Token of Gratitude</title>
+    <style>
+        :root { 
+            --walnut: #3e2723; 
+            --gold: #d4af37;
+            --lace: rgba(255,255,255,0.15);
+        }
+
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            background: #000; overflow: hidden; font-family: 'Georgia', serif;
+        }
+
+        /* THE MASTER BOX FRAME */
+        .box-container {
+            position: relative;
+            width: 100vw; height: 100vh;
+            border: 22px solid var(--walnut);
+            box-sizing: border-box;
+            background: #1a0a0a;
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* THE VICTORIAN LACE LID */
+        .box-container::after {
+            content: ''; position: absolute; inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/p6.png');
+            opacity: 0.2; pointer-events: none; z-index: 10;
+        }
+
+        /* THE DINNER MEMORY (SCREENSHOT) */
+        #photo-layer {
+            position: absolute; inset: 0;
+            background: url('YOUR_PHOTO_URL_HERE') center/cover;
+            opacity: 0.5; filter: sepia(0.4) blur(1px);
+            z-index: 1;
+        }
+
+        /* THE BALLOON AUTOMATA */
+        #balloon {
+            position: absolute; bottom: -160px; left: 50%;
+            width: 80px; transform: translateX(-50%);
+            z-index: 5; transition: all 12s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .envelope {
+            width: 70px; height: 90px; background: var(--gold);
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            border: 1px solid #b8860b;
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.05) 8px, rgba(0,0,0,0.05) 16px);
+        }
+
+        .basket {
+            width: 30px; height: 18px; background: #5d4037;
+            margin-top: 10px; border-radius: 2px;
+            color: white; font-size: 9px; text-align: center;
+            line-height: 18px; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* THE INTERACTIVE BUTTON */
+        #btn {
+            position: absolute; bottom: 50px; z-index: 20;
+            padding: 12px 24px; background: var(--walnut);
+            color: var(--gold); border: 1px solid var(--gold);
+            cursor: pointer; text-transform: uppercase; letter-spacing: 2px;
+            font-size: 12px; transition: 0.3s;
+        }
+
+        #btn:active { transform: scale(0.95); background: var(--gold); color: var(--walnut); }
+    </style>
+</head>
+<body>
+
+<div class="box-container">
+    <div id="photo-layer"></div>
+    
+    <div id="balloon">
+        <div class="envelope"></div>
+        <div class="basket">THANKS</div>
+    </div>
+
+    <button id="btn" onclick="launch()">Launch Gratitude</button>
+</div>
+
+<script>
+    function launch() {
+        const b = document.getElementById('balloon');
+        const btn = document.getElementById('btn');
+        
+        // Hide button and fly away
+        btn.style.opacity = '0';
+        btn.style.pointerEvents = 'none';
+        
+        // Transform the balloon across the "screen"
+        b.style.bottom = '120vh';
+        b.style.left = '85%';
+        b.style.transform = 'translateX(-50%) scale(0.1) rotate(20deg)';
+    }
+</script>
+
+</body>
+</html>
